@@ -1,4 +1,4 @@
-# Set the working directory
+# Set the working directory (the folder containing all the data sets)
 setwd("C:/Users/Robert/University Homework Notes/Santa Clara University/Computer Science (CSCI)/Computer Science 183 - Data Science/HW 1")
 
 # Install the summaryBy package (for making tables of summary statistics) and load
@@ -58,7 +58,7 @@ for(x in 1:31)
 }
 
 # Plot AD_Vulnerability.mean over time
-ggplot(masterSummaryMeanDataFrame, aes(x = Day, y = AD_Vulnerability.mean, color = Age_Group) + geom_line()
+ggplot(masterSummaryMeanDataFrame, aes(x = Day, y = AD_Vulnerability.mean, color = Age_Group)) + geom_line()
 
 # Plot clicks.mean over time
 ggplot(masterSummaryMeanDataFrame, aes(x = Day, y = Clicks.mean, color = Age_Group)) + geom_line()

@@ -56,7 +56,7 @@ modelFit <- train(booking_bool ~ ., data = train, method = "gbm", trControl = fi
 
 # Convert probabilities to classifications
 # 0.05 is used as a cutoff because it is near the third quartile of the predictions for samples in the training set that had a booking_bool of 1
-# This can be seen using the following command: summary(predict(modelFit, newdata = subset(test, booking_bool == 1)))
+# This can be seen using the following command: summary(predict(modelFit, newdata = subset(train, booking_bool == 1)))
 classificationFunction <- function(x)
 {
   if (x < 0.05)
@@ -64,7 +64,7 @@ classificationFunction <- function(x)
   else
     x <- 1
 }
-confusionMatrix(sapply(predict(modelFit, newdata = test), classificationFunction), test$booking_bool)
+confusionMatrix(sapply(predict(modelFit, newdata = train), classificationFunction), train$booking_bool)
 
 # Create output .csv file containing predictions
 test <- read.csv("test.csv")

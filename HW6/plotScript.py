@@ -1,5 +1,5 @@
 from os import chdir
-chdir("C:/Users/Robert/University Homework Notes/Santa Clara University/Computer Science (CSCI)/Computer Science 183 - Data Science/HW 6")
+chdir("C:/Users/Robert/University Homework Notes/Santa Clara University/Computer Science (CSCI)/Computer Science 183 - Data Science/HW 6/Starcraft 2 Blog")
 
 import pandas
 data = pandas.read_csv("SkillCraft1_Dataset.csv")
@@ -37,7 +37,7 @@ def boxPlot(category, xLabel, yLabel, yLowerLimit, yUpperLimit,
     plt.ylim(yLowerLimit, yUpperLimit)
     figure.show()  
     if saveFile:
-        plt.savefig(fileName)
+        plt.savefig(fileName, bbox_inches = "tight")
 
 boxPlot(category = "HoursPerWeek", 
         xLabel = "League", yLabel = "Hours Played Per Week",
@@ -58,6 +58,16 @@ boxPlot(category = "ActionLatency",
         xLabel = "League", yLabel = "Action Latency (ms)",
         yLowerLimit = 0, yUpperLimit = 200,
         saveFile = True, fileName = "actionLatency.png")
+
+boxPlot(category = "NumberOfPACs",
+        xLabel = "League", yLabel = "Rate of PACs",
+        yLowerLimit = 0, yUpperLimit = 0.0075,
+        saveFile = True, fileName = "ratePACs.png")
+        
+boxPlot(category = "GapBetweenPACs",
+        xLabel = "League", yLabel = "Gap Between PACs (ms)",
+        yLowerLimit = 0, yUpperLimit = 140,
+        saveFile = True, fileName = "gapPACs.png")
 
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier
 features = data.drop(["GameID", "LeagueIndex"], axis = 1)

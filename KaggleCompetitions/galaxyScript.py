@@ -52,23 +52,26 @@ from keras.optimizers import SGD
 
 cnnModel = Sequential()
 
-cnnModel.add(Convolution2D(32, 3, 3, 3, border_mode = "full"))
+cnnModel.add(Convolution2D(32, 3, 2, 2, border_mode = "full"))
 cnnModel.add(Activation('relu'))
 cnnModel.add(MaxPooling2D(poolsize=(2,2)))
+cnnModel.add(Dropout(0.25))
 
-cnnModel.add(Convolution2D(32, 32, 3, 3, border_mode = "full"))
+cnnModel.add(Convolution2D(32, 32, 2, 2, border_mode = "full"))
 cnnModel.add(Activation('relu'))
 cnnModel.add(MaxPooling2D(poolsize=(2,2)))
+cnnModel.add(Dropout(0.25))
 
-cnnModel.add(Convolution2D(32, 32, 3, 3, border_mode = "full"))
+cnnModel.add(Convolution2D(32, 32, 2, 2, border_mode = "full"))
 cnnModel.add(Activation('relu'))
 cnnModel.add(MaxPooling2D(poolsize=(2,2)))
+cnnModel.add(Dropout(0.25))
 
 cnnModel.add(Flatten())
 
-cnnModel.add(Dense(2592, 512))
+cnnModel.add(Dense(32 * 8 * 8, 512))
 cnnModel.add(Activation('relu'))
-cnnModel.add(Dropout(0.25))
+cnnModel.add(Dropout(0.5))
 
 cnnModel.add(Dense(512, 1))
 cnnModel.add(Activation('linear'))
@@ -76,7 +79,7 @@ cnnModel.add(Activation('linear'))
 sgd = SGD(lr = 0.05, decay = 1e-6, momentum = 0.9, nesterov = True)
 cnnModel.compile(loss='mean_squared_error', optimizer = sgd)
 
-cnnModel.fit(trainArray, trainProb_Smooth, nb_epoch = 20)
+cnnModel.fit(trainArray, trainProb_Smooth, nb_epoch = 30)
 
 predictions = cnnModel.predict(testArray)
 testDF.Prob_Smooth = predictions
